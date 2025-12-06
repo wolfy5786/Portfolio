@@ -11,7 +11,7 @@ export function About() {
           <div className="mb-12">
             <div className="w-48 h-48 rounded-2xl overflow-hidden shadow-2xl ring-4 ring-slate-100">
               <ImageWithFallback
-                src="/images/ANKUSHIMAGE.jpg"
+                src="./images/ANKUSHIMAGE.jpg"
                 alt="Workspace"
                 className="w-full h-full object-cover"
               />
@@ -31,7 +31,7 @@ export function About() {
             </p>
             
             <a 
-              href="/pdfs/resume.pdf" 
+              href="./pdfs/resume.pdf" 
               download
               className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors shadow-md hover:shadow-lg mb-8"
             >
