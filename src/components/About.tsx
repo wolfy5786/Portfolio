@@ -11,7 +11,7 @@ export function About() {
           <div className="mb-12">
             <div className="w-48 h-48 rounded-2xl overflow-hidden shadow-2xl ring-4 ring-slate-100">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1666723043169-22e29545675c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjB3b3Jrc3BhY2UlMjBkZXNrfGVufDF8fHx8MTc2NDg4NTc3Mnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                src="/images/ANKUSHIMAGE.jpg"
                 alt="Workspace"
                 className="w-full h-full object-cover"
               />
@@ -31,7 +31,7 @@ export function About() {
             </p>
             
             <a 
-              href="/resume.pdf" 
+              href="/pdfs/resume.pdf" 
               download
               className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors shadow-md hover:shadow-lg mb-8"
             >

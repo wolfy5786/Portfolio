@@ -7,7 +7,7 @@ const education = [
     institution: 'San Jose State University',
     period: '2025 - 2027',
     description: 'Specialized in Distributed Systems and Artificial Intelligence',
-    logo: 'https://www.sjsu.edu/brand/_images/sjsu-logo-primary.png',
+    logo: '/images/SJSU.jpg',
     achievements: [
       'Enterprise Software',
       'Distributes Software and Design',
@@ -20,7 +20,7 @@ const education = [
     institution: 'Rutgers University',
     period: '2021 - 2025',
     description: 'Focus on Software Engineering and Algorithims',
-    logo: 'https://www.rutgers.edu/themes/custom/rutgers/images/rusig.svg',
+    logo: '/images/Rutgers.jpg',
     achievements: [
       'GPA: 3.7/4.0',
       'President of IEEE Club',
