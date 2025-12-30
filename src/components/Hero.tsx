@@ -1,6 +1,16 @@
 import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
 
 export function Hero() {
+    const scrollToWorkExperience = () => {
+      const workExpSection = document.getElementById('experience');
+      if (workExpSection) {
+        workExpSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    const handleContactClick = () => {
+      window.location.href = 'mailto:makhijaniankush24@gmail.com';
+    };
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white px-4">
       <div className="max-w-4xl mx-auto text-center">
@@ -21,11 +31,13 @@ export function Hero() {
         </div>
         
         <div className="flex gap-4 justify-center mb-8">
-          <button className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors flex items-center gap-2">
+          <button onClick={scrollToWorkExperience}
+          className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors flex items-center gap-2">
             View My Work
             <ArrowRight className="w-4 h-4" />
           </button>
-          <button className="px-6 py-3 border border-slate-600 hover:border-slate-400 rounded-lg transition-colors">
+          <button onClick={handleContactClick}
+          className="px-6 py-3 border border-slate-600 hover:border-slate-400 rounded-lg transition-colors">
             Contact Me
           </button>
         </div>

@@ -25,7 +25,6 @@ export function About() {
               Backend Systems that are Reliable, Secure, Scalable and can be integrated easily.
             </p>
             <p className="text-slate-600 mb-8 text-justify">
-              Hi! I'm a Software Engineer who loves building useful things with clean code.
               I enjoy learning how systems work behind the scenes, improving my craft, and taking on projects that help me grow. 
               I'm passionate about continuous learning, good engineering practices, and creating software that actually helps people.
             </p>
