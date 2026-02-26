@@ -84,15 +84,13 @@ export function Projects() {
                   ))}
                 </div>
                 
-
-                  <a 
-                    href={project.githubUrl}
-                    className="flex items-center gap-2 text-slate-600 hover:text-slate-700 transition-colors"
-                  >
-                    <Github className="w-4 h-4" />
-                    <span>Code</span>
-                  </a>
-                </div>
+                <a 
+                  href={project.githubUrl}
+                  className="flex items-center gap-2 text-slate-600 hover:text-slate-700 transition-colors"
+                >
+                  <Github className="w-4 h-4" />
+                  <span>Code</span>
+                </a>
               </div>
             </div>
           ))}
