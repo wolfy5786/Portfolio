@@ -25,8 +25,7 @@ export function Hero() {
             Software Engineer
           </p>
           <p className="text-slate-400 max-w-2xl mx-auto mb-8">
-            I build systems that are simple to use, smart under the hood, and built to last. Turning ideas into fast, reliable software, that solve real problems. 
-            Passionate about clean code, intuitive design, and building products people love.
+            Designing Systems that change the world for better.
           </p>
         </div>
         
