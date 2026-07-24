@@ -1,10 +1,10 @@
 import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
 
 export function Hero() {
-    const scrollToWorkExperience = () => {
-      const workExpSection = document.getElementById('experience');
-      if (workExpSection) {
-        workExpSection.scrollIntoView({ behavior: 'smooth' });
+    const scrollToStarProjects = () => {
+      const starProjectsSection = document.getElementById('star-projects');
+      if (starProjectsSection) {
+        starProjectsSection.scrollIntoView({ behavior: 'smooth' });
       }
     };
 
@@ -30,7 +30,7 @@ export function Hero() {
         </div>
         
         <div className="flex gap-4 justify-center mb-8">
-          <button onClick={scrollToWorkExperience}
+          <button onClick={scrollToStarProjects}
           className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors flex items-center gap-2">
             View My Work
             <ArrowRight className="w-4 h-4" />
