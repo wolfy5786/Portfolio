@@ -7,10 +7,12 @@ import { Projects } from './components/Projects';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { StarProjects } from './components/StarProjects';
+import { ThemeToggle } from './components/ThemeToggle';
 
 export default function App() {
   return (
     <div className="min-h-screen">
+      <ThemeToggle />
       <Hero />
       <About />
       <StarProjects />

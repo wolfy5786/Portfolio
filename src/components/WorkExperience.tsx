@@ -31,16 +31,16 @@ const experiences = [
 
 export function WorkExperience() {
   return (
-    <section id="experience" className="py-20 px-4 bg-white">
+    <section id="experience" className="py-20 px-4 bg-white dark:bg-slate-900">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-center mb-4">Work Experience</h2>
-        <p className="text-center text-slate-600 mb-16 max-w-2xl mx-auto">
+        <p className="text-center text-slate-600 dark:text-slate-400 mb-16 max-w-2xl mx-auto">
           My professional journey and key accomplishments
         </p>
-        
+
         <div className="relative">
           {/* Timeline line */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-slate-200"></div>
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-slate-200 dark:bg-slate-700"></div>
           
           <div className="space-y-12">
             {experiences.map((exp, index) => (
@@ -51,23 +51,23 @@ export function WorkExperience() {
                 }`}
               >
                 {/* Timeline dot */}
-                <div className="hidden md:block absolute left-1/2 top-8 transform -translate-x-1/2 w-4 h-4 bg-blue-600 rounded-full ring-4 ring-white z-10"></div>
-                
+                <div className="hidden md:block absolute left-1/2 top-8 transform -translate-x-1/2 w-4 h-4 bg-blue-600 rounded-full ring-4 ring-white dark:ring-slate-900 z-10"></div>
+
                 {/* Content */}
                 <div className={index % 2 === 0 ? 'md:text-right md:pr-12' : 'md:col-start-2 md:pl-12'}>
-                  <div className="bg-slate-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-                    <div className="flex items-center gap-2 text-blue-600 mb-2">
+                  <div className="bg-slate-50 dark:bg-slate-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                    <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400 mb-2">
                       <Briefcase className="w-4 h-4" />
                       <span className="text-sm">{exp.company}</span>
                     </div>
                     <h3 className="mb-2">{exp.title}</h3>
-                    <div className="flex items-center gap-2 text-slate-500 mb-3">
+                    <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 mb-3">
                       <Calendar className="w-4 h-4" />
                       <span className="text-sm">{exp.period}</span>
                     </div>
 
                     {/* FIX: Force bullets to align left */}
-                    <div className="text-slate-600 mb-4 space-y-1 text-left">
+                    <div className="text-slate-600 dark:text-slate-300 mb-4 space-y-1 text-left">
                       {exp.description.split('\n').map((line, i) => (
                         <p key={i} className="text-left">{line}</p>
                       ))}

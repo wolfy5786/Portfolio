@@ -49,26 +49,26 @@ const certifications = [
 
 export function Education() {
   return (
-    <section id="education" className="py-20 px-4 bg-slate-50">
+    <section id="education" className="py-20 px-4 bg-slate-50 dark:bg-slate-900">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-center mb-4">Education</h2>
-        <p className="text-center text-slate-600 mb-16 max-w-2xl mx-auto">
+        <p className="text-center text-slate-600 dark:text-slate-400 mb-16 max-w-2xl mx-auto">
           Academic background and professional certifications
         </p>
-        
+
         <div className="space-y-8">
           {education.map((edu, index) => (
-            <div 
+            <div
               key={index}
-              className="relative bg-gradient-to-br from-white to-slate-50 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all border border-slate-200 overflow-hidden group"
+              className="relative bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all border border-slate-200 dark:border-slate-700 overflow-hidden group"
             >
               {/* Decorative gradient background */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-50 to-transparent rounded-full blur-3xl opacity-50 group-hover:opacity-70 transition-opacity"></div>
-              
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-50 dark:from-blue-950/40 to-transparent rounded-full blur-3xl opacity-50 group-hover:opacity-70 transition-opacity"></div>
+
               <div className="relative flex flex-col md:flex-row gap-6">
                 {/* Logo Section */}
                 <div className="flex-shrink-0">
-                  <div className="w-24 h-24 bg-white rounded-2xl shadow-md flex items-center justify-center p-4 border border-slate-100">
+                  <div className="w-24 h-24 bg-white dark:bg-slate-800 rounded-2xl shadow-md flex items-center justify-center p-4 border border-slate-100 dark:border-slate-700">
                     <ImageWithFallback
                       src={edu.logo}
                       alt={`${edu.institution} logo`}
@@ -80,19 +80,19 @@ export function Education() {
                 {/* Content Section */}
                 <div className="flex-1">
                   <div className="mb-4">
-                    <h3 className="mb-2 text-slate-800">{edu.degree}</h3>
-                    <p className="text-blue-600 mb-1">{edu.institution}</p>
-                    <p className="text-slate-500">{edu.period}</p>
+                    <h3 className="mb-2 text-slate-800 dark:text-slate-200">{edu.degree}</h3>
+                    <p className="text-blue-600 dark:text-blue-400 mb-1">{edu.institution}</p>
+                    <p className="text-slate-500 dark:text-slate-400">{edu.period}</p>
                   </div>
-                  
-                  <p className="text-slate-600 mb-6">{edu.description}</p>
-                  
+
+                  <p className="text-slate-600 dark:text-slate-300 mb-6">{edu.description}</p>
+
                   {/* Achievements/Courses */}
                   <div className="flex flex-wrap gap-3">
                     {edu.achievements.map((achievement, achIndex) => (
-                      <span 
+                      <span
                         key={achIndex}
-                        className="px-4 py-2 bg-blue-50 text-blue-700 rounded-lg border border-blue-100 hover:bg-blue-100 transition-colors"
+                        className="px-4 py-2 bg-blue-50 text-blue-700 rounded-lg border border-blue-100 hover:bg-blue-100 transition-colors dark:bg-blue-950/40 dark:text-blue-300 dark:border-blue-900 dark:hover:bg-blue-900/40"
                       >
                         {achievement}
                       </span>

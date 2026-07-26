@@ -5,9 +5,9 @@ const projectCategories = [
   {
     icon: Sparkles,
     title: 'Agentic AI',
-    color: 'text-purple-600',
-    bgColor: 'bg-purple-50',
-    borderColor: 'border-purple-200',
+    color: 'text-purple-600 dark:text-purple-400',
+    bgColor: 'bg-purple-50 dark:bg-purple-950/40',
+    borderColor: 'border-purple-200 dark:border-purple-800/50',
     projects: [
       {
         title: 'Codebase Graph RAG',
@@ -49,9 +49,9 @@ const projectCategories = [
   {
     icon: Code,
     title: 'Full Stack',
-    color: 'text-blue-600',
-    bgColor: 'bg-blue-50',
-    borderColor: 'border-blue-200',
+    color: 'text-blue-600 dark:text-blue-400',
+    bgColor: 'bg-blue-50 dark:bg-blue-950/40',
+    borderColor: 'border-blue-200 dark:border-blue-800/50',
     projects: [
       {
         title: 'Event Brite Platform',
@@ -65,9 +65,9 @@ const projectCategories = [
   {
     icon: Code,
     title: 'Software Infrastructure and Testing',
-    color: 'text-orange-600',
-    bgColor: 'bg-orange-50',
-    borderColor: 'border-orange-200',
+    color: 'text-orange-600 dark:text-orange-400',
+    bgColor: 'bg-orange-50 dark:bg-orange-950/40',
+    borderColor: 'border-orange-200 dark:border-orange-800/50',
     projects: [
       {
         title: 'Chaos Engineering',
@@ -81,9 +81,9 @@ const projectCategories = [
   {
     icon: Database,
     title: 'Big Data',
-    color: 'text-orange-600',
-    bgColor: 'bg-orange-50',
-    borderColor: 'border-orange-200',
+    color: 'text-orange-600 dark:text-orange-400',
+    bgColor: 'bg-orange-50 dark:bg-orange-950/40',
+    borderColor: 'border-orange-200 dark:border-orange-800/50',
     projects: [
       {
         title: 'Cricket Analytics',
@@ -98,10 +98,10 @@ const projectCategories = [
 
 export function StarProjects() {
   return (
-    <section id="star-projects" className="py-20 px-4 bg-slate-50">
+    <section id="star-projects" className="py-20 px-4 bg-slate-50 dark:bg-slate-900">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-center mb-6 text-5xl">My Star Projects</h2>
-        <p className="text-center text-slate-600 mb-16 max-w-2xl mx-auto text-xl">
+        <p className="text-center text-slate-600 dark:text-slate-400 mb-16 max-w-2xl mx-auto text-xl">
           Highlighting my most innovative and impactful projects across AI, Full Stack, and Big Data domains
         </p>
 
@@ -116,7 +116,7 @@ export function StarProjects() {
                     <IconComponent className={`w-6 h-6 ${category.color}`} />
                   </div>
                   <h3 className={category.color}>{category.title}</h3>
-                  <div className="flex-1 h-px bg-slate-200"></div>
+                  <div className="flex-1 h-px bg-slate-200 dark:bg-slate-700"></div>
                 </div>
 
                 {/* Projects Grid */}
@@ -124,7 +124,7 @@ export function StarProjects() {
                   {category.projects.map((project, projectIndex) => (
                     <div
                       key={projectIndex}
-                      className={`bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border-2 ${category.borderColor} hover:scale-105`}
+                      className={`bg-white dark:bg-slate-800 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border-2 ${category.borderColor} hover:scale-105`}
                     >
                       <div className="aspect-video overflow-hidden">
                         <ImageWithFallback
@@ -136,7 +136,7 @@ export function StarProjects() {
 
                       <div className="p-6">
                         <h4 className="mb-2 text-lg">{project.title}</h4>
-                        <p className="text-slate-600 text-sm mb-4 line-clamp-3">
+                        <p className="text-slate-600 dark:text-slate-400 text-sm mb-4 line-clamp-3">
                           {project.description}
                         </p>
 
@@ -144,7 +144,7 @@ export function StarProjects() {
                           {project.tags.map((tag, tagIndex) => (
                             <span
                               key={tagIndex}
-                              className="px-2 py-1 bg-slate-100 text-slate-700 rounded text-xs"
+                              className="px-2 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded text-xs"
                             >
                               {tag}
                             </span>
@@ -153,7 +153,7 @@ export function StarProjects() {
 
                         <a
                           href={project.githubUrl}
-                          className="flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors text-sm"
+                          className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors text-sm"
                         >
                           <Github className="w-4 h-4" />
                           <span>View Code</span>

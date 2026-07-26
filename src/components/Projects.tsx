@@ -48,18 +48,18 @@ const projects = [
 
 export function Projects() {
   return (
-    <section id="projects" className="py-20 px-4 bg-white">
+    <section id="projects" className="py-20 px-4 bg-white dark:bg-slate-900">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-center mb-4">Featured Projects</h2>
-        <p className="text-center text-slate-600 mb-16 max-w-2xl mx-auto">
+        <p className="text-center text-slate-600 dark:text-slate-400 mb-16 max-w-2xl mx-auto">
           A selection of my recent work that showcases my skills and experience
         </p>
-        
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
-            <div 
+            <div
               key={index}
-              className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow border border-slate-200"
+              className="bg-white dark:bg-slate-800 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow border border-slate-200 dark:border-slate-700"
             >
               <div className="aspect-video overflow-hidden">
                 <ImageWithFallback
@@ -71,22 +71,22 @@ export function Projects() {
               
               <div className="p-6">
                 <h3 className="mb-2">{project.title}</h3>
-                <p className="text-slate-600 mb-4">{project.description}</p>
-                
+                <p className="text-slate-600 dark:text-slate-400 mb-4">{project.description}</p>
+
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag, tagIndex) => (
-                    <span 
+                    <span
                       key={tagIndex}
-                      className="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm"
+                      className="px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-full text-sm"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-                
-                <a 
+
+                <a
                   href={project.githubUrl}
-                  className="flex items-center gap-2 text-slate-600 hover:text-slate-700 transition-colors"
+                  className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors"
                 >
                   <Github className="w-4 h-4" />
                   <span>Code</span>
