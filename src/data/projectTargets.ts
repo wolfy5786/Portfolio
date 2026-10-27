@@ -141,22 +141,34 @@ function scoreProject(skill: string, project: ProjectTarget, clusterKeywords: st
   let score = 0;
   const tags = project.tags;
   const keywords = project.keywords ?? [];
+  let directHit = false;
 
   for (const tag of tags) {
-    if (tokensOverlap(skill, tag)) score += 40;
+    if (tokensOverlap(skill, tag)) {
+      score += 40;
+      directHit = true;
+    }
   }
-  if (tokensOverlap(skill, project.title)) score += 25;
+  if (tokensOverlap(skill, project.title)) {
+    score += 25;
+    directHit = true;
+  }
   for (const keyword of keywords) {
-    if (tokensOverlap(skill, keyword)) score += 18;
+    if (tokensOverlap(skill, keyword)) {
+      score += 18;
+      directHit = true;
+    }
   }
 
-  // Soft cluster context — never outweigh a direct skill hit
-  for (const keyword of clusterKeywords) {
-    for (const tag of tags) {
-      if (tokensOverlap(keyword, tag)) score += 2;
-    }
-    for (const item of keywords) {
-      if (tokensOverlap(keyword, item)) score += 1;
+  // Soft cluster context only when the skill itself didn't hit this project
+  if (!directHit) {
+    for (const keyword of clusterKeywords) {
+      for (const tag of tags) {
+        if (tokensOverlap(keyword, tag)) score += 2;
+      }
+      for (const item of keywords) {
+        if (tokensOverlap(keyword, item)) score += 1;
+      }
     }
   }
 
