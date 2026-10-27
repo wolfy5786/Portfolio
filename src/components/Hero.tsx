@@ -12,8 +12,8 @@ export function Hero() {
     <section className="relative min-h-screen flex items-center overflow-hidden bg-stage text-stage-ink px-4 pt-24 pb-16">
       <ColorField />
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-6 items-center">
-        <div className="text-center lg:text-left">
+      <div className="relative z-10 max-w-7xl mx-auto w-full">
+        <div className="text-center max-w-3xl mx-auto mb-8 lg:mb-4">
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -29,16 +29,14 @@ export function Hero() {
             transition={{ duration: 0.65, delay: 0.05 }}
             className="mb-6"
           >
-            Ankush
-            <br />
-            Makhijani
+            Ankush Makhijani
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.15 }}
-            className="text-lg md:text-xl text-stage-muted max-w-xl mx-auto lg:mx-0 mb-10"
+            className="text-lg md:text-xl text-stage-muted max-w-xl mx-auto mb-8"
           >
             Designing systems that change the world for better.
           </motion.p>
@@ -47,7 +45,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.25 }}
-            className="flex flex-col sm:flex-row items-center gap-5 justify-center lg:justify-start"
+            className="flex flex-col sm:flex-row items-center gap-5 justify-center"
           >
             <button
               onClick={scrollToWork}
@@ -87,7 +85,7 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="relative"
+          className="relative max-w-4xl mx-auto"
         >
           <Skills embedded />
         </motion.div>
