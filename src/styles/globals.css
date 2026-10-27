@@ -1,9 +1,11 @@
 @custom-variant dark (&:is(.dark *));
 
-:root {
+:root,
+.light {
   --font-size: 16px;
   --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  color-scheme: light;
 
   /* Warm paper light theme */
   --background: #f3efe6;
@@ -40,11 +42,11 @@
   --signal-rose: #f43f5e;
   --signal-indigo: #6366f1;
 
-  --stage: #f3efe6;
-  --stage-elevated: #ebe5da;
-  --stage-ink: #12141a;
-  --stage-muted: #5c5f6a;
-  --stage-line: rgba(18, 20, 26, 0.12);
+  --stage: var(--background);
+  --stage-elevated: var(--card);
+  --stage-ink: var(--foreground);
+  --stage-muted: var(--muted-foreground);
+  --stage-line: var(--border);
 
   --chart-1: #3b82f6;
   --chart-2: #22d3ee;
@@ -62,6 +64,7 @@
 }
 
 .dark {
+  color-scheme: dark;
   --background: #0a0b0e;
   --foreground: #f4f1ea;
   --card: #12141a;
@@ -84,11 +87,11 @@
   --font-weight-medium: 500;
   --font-weight-normal: 400;
 
-  --stage: #0a0b0e;
-  --stage-elevated: #12141a;
-  --stage-ink: #f4f1ea;
-  --stage-muted: #9aa0ae;
-  --stage-line: rgba(244, 241, 234, 0.1);
+  --stage: var(--background);
+  --stage-elevated: var(--card);
+  --stage-ink: var(--foreground);
+  --stage-muted: var(--muted-foreground);
+  --stage-line: var(--border);
 
   --chart-1: #60a5fa;
   --chart-2: #22d3ee;

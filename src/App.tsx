@@ -9,7 +9,7 @@ import { StarProjects } from './components/StarProjects';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-stage text-stage-ink">
+    <div className="min-h-screen bg-background text-foreground">
       <Nav />
       <Hero />
       <StarProjects />
