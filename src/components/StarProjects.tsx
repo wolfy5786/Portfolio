@@ -14,6 +14,7 @@ import {
 } from './ProjectMotifs';
 
 type Project = {
+  id: string;
   title: string;
   description: string;
   tags: string[];
@@ -32,6 +33,7 @@ const projectCategories: Category[] = [
     title: 'System Engineering',
     projects: [
       {
+        id: 'project-graph-analytics',
         title: 'Graph Analytics',
         description:
           'Graph analytics toolkit for exploring structure, relationships, and performance across large connected datasets',
@@ -46,6 +48,7 @@ const projectCategories: Category[] = [
     title: 'Agentic AI',
     projects: [
       {
+        id: 'project-codebase-graph-rag',
         title: 'Codebase Graph RAG',
         description:
           'Graph RAG MCP server that ingests codebase repositories and builds a Graph database with vector embeddings and logical relationships',
@@ -55,6 +58,7 @@ const projectCategories: Category[] = [
         accent: 'text-signal-violet',
       },
       {
+        id: 'project-eye-ai',
         title: 'EYE AI',
         description:
           'An event-driven, serverless situational awareness platform for emergency dispatchers, fusing audio transcription, entity extraction, and multi-camera computer vision to turn high-stress 911 calls into verified, queryable incidents on a map in seconds',
@@ -64,6 +68,7 @@ const projectCategories: Category[] = [
         accent: 'text-signal-cyan',
       },
       {
+        id: 'project-big-writer',
         title: 'Big Writer',
         description:
           'Pushing the limits of AI agents to generate content using light RAG and knowledge graphs',
@@ -73,6 +78,7 @@ const projectCategories: Category[] = [
         accent: 'text-signal-emerald',
       },
       {
+        id: 'project-rag',
         title: 'RAG',
         description:
           'Retrieval-augmented Q&A system for slide-style PDFs without selectable text, using vision language models to extract text, tables, and charts, then grounding every answer strictly in the ingested document',
@@ -82,6 +88,7 @@ const projectCategories: Category[] = [
         accent: 'text-signal-blue',
       },
       {
+        id: 'project-outbound-agent',
         title: 'Outbound Agent',
         description:
           'Event-driven microservices platform for autonomous B2B email outreach, coordinating lead discovery, enrichment, and personalized messaging across seven services via a message queue',
@@ -96,6 +103,7 @@ const projectCategories: Category[] = [
     title: 'Full Stack',
     projects: [
       {
+        id: 'project-event-brite',
         title: 'Event Brite Platform',
         description:
           'Full-stack microservice application for Event creation and ticketing, easy to scale integrate hosted on AWS',
@@ -110,6 +118,7 @@ const projectCategories: Category[] = [
     title: 'Software Infrastructure and Testing',
     projects: [
       {
+        id: 'project-chaos-engineering',
         title: 'Chaos Engineering',
         description:
           'Chaos engineering to test distributed systems by deliberately injecting faults to test real time failures',
@@ -124,6 +133,7 @@ const projectCategories: Category[] = [
     title: 'Big Data',
     projects: [
       {
+        id: 'project-cricket-analytics',
         title: 'Cricket Analytics',
         description:
           'This project dives deep into cricket match data using ball-by-ball delivery information to analyze performance trends, uncover scoring patterns, and simulate future deliveries',
@@ -169,12 +179,13 @@ export function StarProjects() {
 
                   return (
                     <motion.article
+                      id={project.id}
                       key={project.title}
                       initial={{ opacity: 0, y: 28 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: '-60px' }}
                       transition={{ duration: 0.55 }}
-                      className={`grid lg:grid-cols-2 gap-8 lg:gap-12 items-center ${
+                      className={`scroll-mt-28 project-target grid lg:grid-cols-2 gap-8 lg:gap-12 items-center ${
                         reverse ? 'lg:[&>*:first-child]:order-2' : ''
                       }`}
                     >
