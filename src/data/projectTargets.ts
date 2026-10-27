@@ -10,14 +10,14 @@ export const projectTargets: ProjectTarget[] = [
   {
     id: 'project-graph-analytics',
     title: 'Graph Analytics',
-    tags: ['Python', 'Graphs', 'Analytics', 'Systems'],
-    keywords: ['GPU', 'MPI', 'OpenMP', 'SIMD', 'Performance optimization', 'System Engineering'],
+    tags: ['Python', 'Graphs', 'Analytics', 'Systems', 'GPU', 'MPI', 'OpenMP', 'SIMD'],
+    keywords: ['Performance optimization', 'System Engineering'],
   },
   {
     id: 'project-codebase-graph-rag',
     title: 'Codebase Graph RAG',
     tags: ['Python', 'LSP', 'Redis', 'Neo4j', 'FastAPI', 'Supabase', 'MCP', 'RAG'],
-    keywords: ['LangChain', 'LangGraph', 'LLM', 'Agentic AI'],
+    keywords: ['LangChain', 'LangGraph', 'LLM', 'Agentic AI', 'GraphQL'],
   },
   {
     id: 'project-eye-ai',
@@ -47,19 +47,19 @@ export const projectTargets: ProjectTarget[] = [
     id: 'project-event-brite',
     title: 'Event Brite Platform',
     tags: ['Java', 'Spring', 'Supabase', 'AWS', 'RabbitMQ', 'Docker'],
-    keywords: ['Spring Boot', 'JAVA', 'AWS EC2', 'REST APIs'],
+    keywords: ['Spring Boot', 'JAVA', 'AWS EC2', 'REST APIs', 'Hibernate'],
   },
   {
     id: 'project-chaos-engineering',
     title: 'Chaos Engineering',
     tags: ['Python', 'Kubernetes', 'Software Testing', 'AWS'],
-    keywords: ['JUnit', 'PyUnit', 'Mockito', 'Cucumber', 'Selenium', 'Playwright', 'Jenkins'],
+    keywords: ['JUnit', 'PyUnit', 'Mockito', 'Cucumber', 'Selenium', 'Playwright'],
   },
   {
     id: 'project-cricket-analytics',
     title: 'Cricket Analytics',
     tags: ['Python', 'Power BI', 'Scikit-Learn', 'GDA', 'AWS'],
-    keywords: ['Scikit Learn', 'TensorFlow', 'PyTorch', 'CUDA', 'PowerBI', 'OLAP', 'OLTP', 'PySpark', 'Hadoop', 'Apache Airflow'],
+    keywords: ['Scikit Learn', 'PowerBI', 'OLAP', 'OLTP', 'PySpark', 'Hadoop', 'Apache Airflow', 'Analytics'],
   },
   {
     id: 'project-boost',
@@ -77,7 +77,7 @@ export const projectTargets: ProjectTarget[] = [
     id: 'project-piggyback',
     title: 'Piggyback',
     tags: ['Java', 'Spring Boot', 'PostgreSQL', 'AWS EC2', 'Docker'],
-    keywords: ['JAVA', 'Hibernate', 'REST APIs', 'gRPC'],
+    keywords: ['JAVA', 'Hibernate', 'REST APIs', 'gRPC', 'SQL'],
   },
   {
     id: 'project-next-play',
@@ -94,8 +94,8 @@ export const projectTargets: ProjectTarget[] = [
   {
     id: 'working-on',
     title: 'Model compression for embedded systems for prosthetics applications',
-    tags: ['CUDA', 'PyTorch', 'TensorFlow', 'GPU', 'SIMD', 'Performance optimization', 'Embedded'],
-    keywords: ['Machine Learning', 'System Engineering', 'OpenMP', 'MPI'],
+    tags: ['CUDA', 'PyTorch', 'TensorFlow', 'GPU', 'SIMD', 'Performance optimization', 'Embedded', 'Machine Learning'],
+    keywords: ['Scikit Learn', 'System Engineering', 'OpenMP', 'MPI', 'ML'],
   },
 ];
 
@@ -115,6 +115,8 @@ const ALIASES: Record<string, string[]> = {
   restapis: ['restapis', 'rest', 'restapi'],
   githubactions: ['githubactions', 'github'],
   softwaretesting: ['softwaretesting', 'testing'],
+  machinelearning: ['machinelearning', 'ml'],
+  artificialintelligence: ['artificialintelligence', 'ai'],
 };
 
 function expandToken(token: string): string[] {
@@ -130,7 +132,35 @@ function expandToken(token: string): string[] {
 function tokensOverlap(a: string, b: string) {
   const left = expandToken(a);
   const right = expandToken(b);
-  return left.some((l) => right.some((r) => l === r || (l.length > 2 && r.includes(l)) || (r.length > 2 && l.includes(r))));
+  return left.some((l) =>
+    right.some((r) => l === r || (l.length > 3 && r.includes(l)) || (r.length > 3 && l.includes(r))),
+  );
+}
+
+function scoreProject(skill: string, project: ProjectTarget, clusterKeywords: string[]) {
+  let score = 0;
+  const tags = project.tags;
+  const keywords = project.keywords ?? [];
+
+  for (const tag of tags) {
+    if (tokensOverlap(skill, tag)) score += 40;
+  }
+  if (tokensOverlap(skill, project.title)) score += 25;
+  for (const keyword of keywords) {
+    if (tokensOverlap(skill, keyword)) score += 18;
+  }
+
+  // Soft cluster context — never outweigh a direct skill hit
+  for (const keyword of clusterKeywords) {
+    for (const tag of tags) {
+      if (tokensOverlap(keyword, tag)) score += 2;
+    }
+    for (const item of keywords) {
+      if (tokensOverlap(keyword, item)) score += 1;
+    }
+  }
+
+  return score;
 }
 
 export function findBestProjectId(skill: string, clusterKeywords: string[] = []): string | null {
@@ -138,19 +168,7 @@ export function findBestProjectId(skill: string, clusterKeywords: string[] = [])
   let bestScore = 0;
 
   for (const project of projectTargets) {
-    let score = 0;
-    const haystack = [...project.tags, ...(project.keywords ?? []), project.title];
-
-    for (const item of haystack) {
-      if (tokensOverlap(skill, item)) score += 12;
-    }
-
-    for (const keyword of clusterKeywords) {
-      for (const item of haystack) {
-        if (tokensOverlap(keyword, item)) score += 3;
-      }
-    }
-
+    const score = scoreProject(skill, project, clusterKeywords);
     if (score > bestScore) {
       bestScore = score;
       bestId = project.id;

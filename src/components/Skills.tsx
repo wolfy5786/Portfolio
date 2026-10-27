@@ -345,7 +345,7 @@ export function Skills({ embedded = false }: SkillsProps) {
     if (!id) return;
 
     const moved = Math.hypot(e.clientX - pointerStartRef.current.x, e.clientY - pointerStartRef.current.y);
-    if (moved > 5) didDragRef.current = true;
+    if (moved > 10) didDragRef.current = true;
 
     const local = clientToSvg(e.clientX, e.clientY);
     const r = id.startsWith('tech:') ? SUB_R : HUB_R;
