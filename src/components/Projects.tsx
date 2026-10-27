@@ -1,98 +1,75 @@
-import { ExternalLink, Github } from 'lucide-react';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import { Github } from 'lucide-react';
 
 const projects = [
   {
     title: 'Boost',
     description: 'Automated Software Testing and QA',
-    image: 'https://images.unsplash.com/photo-1763568258244-9d5aa9c3ce45?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb2Z0d2FyZSUyMHRlc3RpbmclMjBhdXRvbWF0aW9uJTIwY29kZXxlbnwxfHx8fDE3NjUwMDQ5MTJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    tags: ['Python', 'FastAPI', 'PostgreSQL','PyUint','Docker','Jenkins', 'Linux'],
+    tags: ['Python', 'FastAPI', 'PostgreSQL', 'PyUnit', 'Docker', 'Jenkins', 'Linux'],
     githubUrl: 'https://github.com/wolfy5786/boost',
   },
   {
-    title: 'Onilne Multiplayer Poker',
+    title: 'Online Multiplayer Poker',
     description: 'Web Based Online Multiplayer Poker',
-    image: 'https://images.unsplash.com/photo-1560327317-031f46d0e995?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwb2tlciUyMGNhcmRzJTIwZ2FtZXxlbnwxfHx8fDE3NjUwMDQ5MTN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    tags: ['Python', 'Reddis', 'Django'],
+    tags: ['Python', 'Redis', 'Django'],
     githubUrl: 'https://github.com/wolfy5786/Online_Poker',
   },
   {
     title: 'Piggyback',
     description: 'Cab Booking REST Service',
-    image: 'https://images.unsplash.com/photo-1619933557175-9168d5209fee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0YXhpJTIwY2FiJTIwcmlkZXxlbnwxfHx8fDE3NjUwMDQ5MTN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    tags: ['Java', 'Spring Boot', 'PostgresSQL','AWS EC2','Docker'],
+    tags: ['Java', 'Spring Boot', 'PostgreSQL', 'AWS EC2', 'Docker'],
     githubUrl: 'https://github.com/wolfy5786/piggy_back',
   },
   {
     title: 'Cricket Analytics and Simulation',
     description: 'Test Cricket Analytics and Simulation',
-    image: 'https://images.unsplash.com/photo-1635127725453-5f6ad32cbf92?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmlja2V0JTIwc3BvcnQlMjBzdGFkaXVtfGVufDF8fHx8MTc2NTAwNDkxM3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    tags: ['Python', 'Gausian Discriminant Analysis','PowerBI'],
+    tags: ['Python', 'Gaussian Discriminant Analysis', 'PowerBI'],
     githubUrl: 'https://github.com/wolfy5786/Cricket_analysis',
   },
   {
     title: 'Next Play',
     description: 'Game Recommendation System',
-    image: 'https://images.unsplash.com/photo-1644571580854-114d7d8fa383?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnYW1pbmclMjBjb250cm9sbGVyJTIwY29uc29sZXxlbnwxfHx8fDE3NjUwMDQ5MTR8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    tags: ['TypeScript', 'Node.js','AWS EC2'],
+    tags: ['TypeScript', 'Node.js', 'AWS EC2'],
     githubUrl: 'https://github.com/wolfy5786/NextPlay',
   },
-    {
+  {
     title: 'Web Crawler',
     description: 'Breadth First Search on Website to mine Data',
-    image: 'https://images.unsplash.com/photo-1605116188625-8522bf02d10f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWIlMjBjcmF3bGVyJTIwbmV0d29ya3xlbnwxfHx8fDE3NjUwMDQ5MTR8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    tags: ['Python','curl', 'Linux', 'C'],
+    tags: ['Python', 'curl', 'Linux', 'C'],
     githubUrl: 'https://github.com/wolfy5786/WebCrawler',
   },
 ];
 
 export function Projects() {
   return (
-    <section id="projects" className="py-20 px-4 bg-white dark:bg-slate-900">
+    <section id="projects" className="py-20 px-4 bg-stage text-stage-ink border-t border-stage-line">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-center mb-4">Featured Projects</h2>
-        <p className="text-center text-slate-600 dark:text-slate-400 mb-16 max-w-2xl mx-auto">
-          A selection of my recent work that showcases my skills and experience
-        </p>
+        <div className="mb-10">
+          <p className="text-xs tracking-[0.22em] uppercase text-stage-muted mb-3">Also building</p>
+          <h2 className="text-3xl md:text-4xl">Other projects</h2>
+        </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              className="bg-white dark:bg-slate-800 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow border border-slate-200 dark:border-slate-700"
+        <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {projects.map((project) => (
+            <a
+              key={project.title}
+              href={project.githubUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="snap-start shrink-0 w-[280px] sm:w-[300px] p-5 border border-stage-line rounded-sm bg-stage-elevated/40 hover:bg-stage-elevated transition-colors group"
             >
-              <div className="aspect-video overflow-hidden">
-                <ImageWithFallback
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                />
+              <div className="flex items-start justify-between gap-3 mb-3">
+                <h3 className="text-xl leading-tight">{project.title}</h3>
+                <Github className="w-4 h-4 text-stage-muted group-hover:text-stage-ink transition-colors flex-shrink-0 mt-1" />
               </div>
-              
-              <div className="p-6">
-                <h3 className="mb-2">{project.title}</h3>
-                <p className="text-slate-600 dark:text-slate-400 mb-4">{project.description}</p>
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag, tagIndex) => (
-                    <span
-                      key={tagIndex}
-                      className="px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-full text-sm"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <a
-                  href={project.githubUrl}
-                  className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors"
-                >
-                  <Github className="w-4 h-4" />
-                  <span>Code</span>
-                </a>
+              <p className="text-sm text-stage-muted mb-4">{project.description}</p>
+              <div className="flex flex-wrap gap-1.5">
+                {project.tags.slice(0, 4).map((tag) => (
+                  <span key={tag} className="text-[11px] text-stage-muted border border-stage-line px-2 py-0.5 rounded-full">
+                    {tag}
+                  </span>
+                ))}
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>

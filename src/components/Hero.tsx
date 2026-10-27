@@ -1,57 +1,96 @@
+import { motion } from 'motion/react';
 import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
+import { ColorField } from './ColorField';
+import { Skills } from './Skills';
 
 export function Hero() {
-    const scrollToStarProjects = () => {
-      const starProjectsSection = document.getElementById('star-projects');
-      if (starProjectsSection) {
-        starProjectsSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    };
+  const scrollToWork = () => {
+    document.getElementById('star-projects')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
-    const handleContactClick = () => {
-      window.location.href = 'mailto:makhijaniankush24@gmail.com';
-    };
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white px-4">
-      <div className="max-w-4xl mx-auto text-center">
-        <div className="mb-8">
-          <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center overflow-hidden">
-            <span className="text-5xl">👋</span>
-          </div>
-          <h1 className="mb-4">
-            Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Ankush Makhijani</span>
-          </h1>
-          <p className="text-xl text-slate-300 mb-8">
-            Software Engineer
-          </p>
-          <p className="text-slate-400 max-w-2xl mx-auto mb-8">
-            Designing Systems that change the world for better.
-          </p>
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-stage text-stage-ink px-4 pt-24 pb-16">
+      <ColorField />
+
+      <div className="relative z-10 max-w-7xl mx-auto w-full grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-6 items-center">
+        <div className="text-center lg:text-left">
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-sm tracking-[0.22em] uppercase text-stage-muted mb-5"
+          >
+            Software Engineer · San Jose
+          </motion.p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.05 }}
+            className="mb-6"
+          >
+            Ankush
+            <br />
+            Makhijani
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.15 }}
+            className="text-lg md:text-xl text-stage-muted max-w-xl mx-auto lg:mx-0 mb-10"
+          >
+            Designing systems that change the world for better.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.25 }}
+            className="flex flex-col sm:flex-row items-center gap-5 justify-center lg:justify-start"
+          >
+            <button
+              onClick={scrollToWork}
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-stage-ink text-stage font-medium hover:opacity-90 transition-opacity"
+            >
+              Enter the work
+              <ArrowRight className="w-4 h-4" />
+            </button>
+
+            <div className="flex gap-5 text-stage-muted">
+              <a
+                href="https://github.com/wolfy5786"
+                aria-label="GitHub"
+                className="hover:text-stage-ink transition-colors"
+              >
+                <Github className="w-5 h-5" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/ankush-makhijani/"
+                aria-label="LinkedIn"
+                className="hover:text-stage-ink transition-colors"
+              >
+                <Linkedin className="w-5 h-5" />
+              </a>
+              <a
+                href="mailto:makhijaniankush24@gmail.com"
+                aria-label="Email"
+                className="hover:text-stage-ink transition-colors"
+              >
+                <Mail className="w-5 h-5" />
+              </a>
+            </div>
+          </motion.div>
         </div>
-        
-        <div className="flex gap-4 justify-center mb-8">
-          <button onClick={scrollToStarProjects}
-          className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors flex items-center gap-2">
-            View My Work
-            <ArrowRight className="w-4 h-4" />
-          </button>
-          <button onClick={handleContactClick}
-          className="px-6 py-3 border border-slate-600 hover:border-slate-400 rounded-lg transition-colors">
-            Contact Me
-          </button>
-        </div>
-        
-        <div className="flex gap-6 justify-center text-slate-400">
-          <a href="https://github.com/wolfy5786" className="hover:text-white transition-colors">
-            <Github className="w-6 h-6" />
-          </a>
-          <a href="https://www.linkedin.com/in/ankush-makhijani/" className="hover:text-white transition-colors">
-            <Linkedin className="w-6 h-6" />
-          </a>
-          <a href="makhijaniankush24@gmail.com" className="hover:text-white transition-colors">
-            <Mail className="w-6 h-6" />
-          </a>
-        </div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="relative"
+        >
+          <Skills embedded />
+        </motion.div>
       </div>
     </section>
   );

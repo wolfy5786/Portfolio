@@ -1,49 +1,44 @@
+import { motion } from 'motion/react';
 import { Mail, MapPin, Phone } from 'lucide-react';
+import { ColorField } from './ColorField';
 
 export function Contact() {
   return (
-    <section id="contact" className="py-20 px-4 bg-slate-900 text-white">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-center mb-4">Get In Touch</h2>
-        <p className="text-center text-slate-400 mb-16 max-w-2xl mx-auto">
-          Looking for Software Internships for Summer and Fall 2026
-        </p>
-        
-        <div>
-          <h3 className="mb-8">Contact Information</h3>
-          
-          <div className="space-y-6">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                <Mail className="w-6 h-6" />
-              </div>
-              <div>
-                <p className="text-slate-300 mb-1">Email</p>
-                <p>makhijaniankush24@gmail.com</p>
-              </div>
+    <section id="contact" className="relative py-28 px-4 bg-stage text-stage-ink overflow-hidden border-t border-stage-line">
+      <ColorField density="sparse" />
+
+      <div className="relative z-10 max-w-4xl mx-auto text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.55 }}
+        >
+          <p className="text-xs tracking-[0.22em] uppercase text-stage-muted mb-4">Next chapter</p>
+          <h2 className="mb-5">Get in touch</h2>
+          <p className="text-xl md:text-2xl text-stage-muted mb-10 max-w-2xl mx-auto">
+            Looking for Software Internships for Summer and Fall 2026
+          </p>
+
+          <a
+            href="mailto:makhijaniankush24@gmail.com"
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-stage-ink text-stage text-lg hover:opacity-90 transition-opacity mb-12"
+          >
+            <Mail className="w-5 h-5" />
+            makhijaniankush24@gmail.com
+          </a>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 text-stage-muted">
+            <div className="flex items-center gap-2">
+              <Phone className="w-4 h-4 text-signal-cyan" />
+              <span>+1 (856) 263 1347</span>
             </div>
-            
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                <Phone className="w-6 h-6" />
-              </div>
-              <div>
-                <p className="text-slate-300 mb-1">Phone</p>
-                <p>+1 (856) 263 1347 </p>
-              </div>
-            </div>
-            
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                <MapPin className="w-6 h-6" />
-              </div>
-              <div>
-                <p className="text-slate-300 mb-1">Location</p>
-                <p>San Jose, CA</p>
-              </div>
+            <div className="flex items-center gap-2">
+              <MapPin className="w-4 h-4 text-signal-emerald" />
+              <span>San Jose, CA</span>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

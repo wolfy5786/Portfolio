@@ -11,7 +11,7 @@ export function ThemeToggle() {
   }, []);
 
   if (!mounted) {
-    return <div className="fixed top-4 right-4 z-50 w-10 h-10" />;
+    return <div className="w-9 h-9" />;
   }
 
   const isDark = resolvedTheme === 'dark';
@@ -20,9 +20,9 @@ export function ThemeToggle() {
     <button
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
       aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
-      className="fixed top-4 right-4 z-50 w-10 h-10 flex items-center justify-center rounded-full bg-white/80 dark:bg-slate-800/80 backdrop-blur border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 shadow-md hover:shadow-lg transition-all"
+      className="w-9 h-9 flex items-center justify-center rounded-full border border-stage-line text-stage-ink hover:bg-stage-elevated transition-colors"
     >
-      {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+      {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
     </button>
   );
 }
