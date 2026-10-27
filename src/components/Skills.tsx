@@ -322,12 +322,46 @@ export function Skills({ embedded = false }: SkillsProps) {
     y: Math.min(VIEW_H - r, Math.max(r, y)),
   });
 
+  const navigateForSkill = (skill: string, clusterKey: ClusterKey) => {
+    const cluster = skillClusters.find((c) => c.key === clusterKey);
+    const projectId = findBestProjectId(skill, cluster ? [...cluster.technologies] : []);
+    if (projectId) scrollToProject(projectId);
+  };
+
+  const finishPointer = (e: ReactPointerEvent) => {
+    const key = draggingRef.current;
+    if (!key) return;
+
+    const pos = positionsRef.current[key];
+    homesRef.current[key] = { ...pos };
+    draggingRef.current = null;
+    setDragging(null);
+
+    try {
+      (e.currentTarget as Element).releasePointerCapture?.(e.pointerId);
+    } catch {
+      /* already released */
+    }
+
+    const wasClick = !didDragRef.current;
+    const pending = pendingClickRef.current;
+    pendingClickRef.current = null;
+
+    if (!wasClick || !pending) return;
+
+    if (pending.skillLabel) {
+      navigateForSkill(pending.skillLabel, pending.clusterKey);
+    } else {
+      const cluster = skillClusters.find((c) => c.key === pending.clusterKey);
+      if (cluster) navigateForSkill(cluster.title, pending.clusterKey);
+    }
+  };
+
   const onNodePointerDown = (
     id: string,
     e: ReactPointerEvent<SVGGElement>,
     clickMeta: { clusterKey: ClusterKey; skillLabel?: string },
   ) => {
-    e.preventDefault();
     e.stopPropagation();
     (e.currentTarget as Element).setPointerCapture(e.pointerId);
     const local = clientToSvg(e.clientX, e.clientY);
@@ -340,12 +374,12 @@ export function Skills({ embedded = false }: SkillsProps) {
     setDragging(id);
   };
 
-  const onSvgPointerMove = (e: ReactPointerEvent<SVGSVGElement>) => {
+  const onNodePointerMove = (e: ReactPointerEvent<SVGGElement>) => {
     const id = draggingRef.current;
     if (!id) return;
 
     const moved = Math.hypot(e.clientX - pointerStartRef.current.x, e.clientY - pointerStartRef.current.y);
-    if (moved > 10) didDragRef.current = true;
+    if (moved > 8) didDragRef.current = true;
 
     const local = clientToSvg(e.clientX, e.clientY);
     const r = id.startsWith('tech:') ? SUB_R : HUB_R;
@@ -354,41 +388,6 @@ export function Skills({ embedded = false }: SkillsProps) {
     const next = { ...positionsRef.current, [id]: nextPos };
     positionsRef.current = next;
     setPositions(next);
-  };
-
-  const navigateForSkill = (skill: string, clusterKey: ClusterKey) => {
-    const cluster = skillClusters.find((c) => c.key === clusterKey);
-    const projectId = findBestProjectId(skill, cluster ? [...cluster.technologies] : []);
-    if (projectId) scrollToProject(projectId);
-  };
-
-  const endDrag = (e: ReactPointerEvent) => {
-    const key = draggingRef.current;
-    if (!key) return;
-
-    const pos = positionsRef.current[key];
-    homesRef.current[key] = { ...pos };
-    draggingRef.current = null;
-    setDragging(null);
-
-    try {
-      (e.currentTarget as Element)?.releasePointerCapture?.(e.pointerId);
-    } catch {
-      /* already released */
-    }
-
-    const wasClick = !didDragRef.current;
-    const pending = pendingClickRef.current;
-    pendingClickRef.current = null;
-
-    if (wasClick && pending) {
-      if (pending.skillLabel) {
-        navigateForSkill(pending.skillLabel, pending.clusterKey);
-      } else {
-        const cluster = skillClusters.find((c) => c.key === pending.clusterKey);
-        if (cluster) navigateForSkill(cluster.title, pending.clusterKey);
-      }
-    }
   };
 
   const edges: Array<[ClusterKey, ClusterKey]> = [];
@@ -412,9 +411,6 @@ export function Skills({ embedded = false }: SkillsProps) {
           viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
           className="w-full h-full touch-none select-none"
           style={{ overflow: 'visible' }}
-          onPointerMove={onSvgPointerMove}
-          onPointerUp={(e) => endDrag(e)}
-          onPointerCancel={(e) => endDrag(e)}
           onPointerLeave={() => {
             if (!draggingRef.current) {
               setHoveredCluster(null);
@@ -522,6 +518,9 @@ export function Skills({ embedded = false }: SkillsProps) {
                   transform={`translate(${pos.x}, ${pos.y})`}
                   opacity={muted ? 0.18 : 1}
                   onPointerDown={(e) => onNodePointerDown(id, e, { clusterKey: cluster.key, skillLabel: tech })}
+                  onPointerMove={onNodePointerMove}
+                  onPointerUp={finishPointer}
+                  onPointerCancel={finishPointer}
                   onPointerEnter={() => {
                     if (!draggingRef.current) {
                       setHoveredCluster(cluster.key);
@@ -573,10 +572,13 @@ export function Skills({ embedded = false }: SkillsProps) {
                 key={cluster.key}
                 transform={`translate(${pos.x}, ${pos.y})`}
                 onPointerDown={(e) => onNodePointerDown(cluster.key, e, { clusterKey: cluster.key })}
+                onPointerMove={onNodePointerMove}
+                onPointerUp={finishPointer}
+                onPointerCancel={finishPointer}
                 onPointerEnter={() => {
                   if (!draggingRef.current) setHoveredCluster(cluster.key);
                 }}
-                className={`${isDragging ? 'cursor-grabbing' : 'cursor-grab'} ${
+                className={`${isDragging ? 'cursor-grabbing' : 'cursor-pointer'} ${
                   dimmed ? 'opacity-35' : 'opacity-100'
                 } transition-opacity duration-200`}
                 style={{ touchAction: 'none' }}
