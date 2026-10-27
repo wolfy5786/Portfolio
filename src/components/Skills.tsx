@@ -3,12 +3,18 @@ import {
   Server,
   Cloud,
   BrainCircuit,
+  LineChart,
   FlaskConical,
   Globe,
   Database as DatabaseIcon,
   GitBranch,
+  Cpu,
   ChevronDown,
 } from 'lucide-react';
+
+function sorted(list: string[]) {
+  return [...list].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+}
 
 const skillClusters = [
   {
@@ -17,7 +23,18 @@ const skillClusters = [
     title: 'Backend Engineering',
     short: 'Backend',
     color: 'var(--signal-blue)',
-    technologies: ['Python', 'JAVA', 'SQL', 'MongoDB', 'PostgreSQL', 'FAST API', 'Django', 'Spring Boot', 'Hibernate', 'Redis'],
+    technologies: sorted([
+      'Python',
+      'JAVA',
+      'SQL',
+      'MongoDB',
+      'PostgreSQL',
+      'FAST API',
+      'Django',
+      'Spring Boot',
+      'Hibernate',
+      'Redis',
+    ]),
   },
   {
     key: 'cloud',
@@ -25,15 +42,51 @@ const skillClusters = [
     title: 'Cloud',
     short: 'Cloud',
     color: 'var(--signal-cyan)',
-    technologies: ['AWS EC2', 'Lambda', 'S3', 'RDS', 'API Gateway', 'CloudWatch', 'GCP', 'Compute Engine', 'Cloud SQL'],
+    technologies: sorted([
+      'AWS EC2',
+      'Lambda',
+      'S3',
+      'RDS',
+      'API Gateway',
+      'CloudWatch',
+      'GCP',
+      'Compute Engine',
+      'Cloud SQL',
+    ]),
   },
   {
     key: 'ai',
     icon: BrainCircuit,
-    title: 'AI, Machine Learning and Analytics',
-    short: 'AI / ML',
+    title: 'Artificial Intelligence',
+    short: 'AI',
     color: 'var(--signal-violet)',
-    technologies: ['N8n', 'LangChain', 'NLP', 'LLM', 'Scikit Learn', 'TensorFlow'],
+    technologies: sorted([
+      'Agentic AI',
+      'LangChain',
+      'LangGraph',
+      'LLM',
+      'MCP',
+      'N8n',
+      'NLP',
+      'RAG',
+      'Workflow automation',
+    ]),
+  },
+  {
+    key: 'ml',
+    icon: LineChart,
+    title: 'Machine Learning',
+    short: 'ML',
+    color: 'var(--signal-orange)',
+    technologies: sorted(['CUDA', 'PyTorch', 'Scikit Learn', 'TensorFlow']),
+  },
+  {
+    key: 'systems',
+    icon: Cpu,
+    title: 'System Engineering',
+    short: 'Systems',
+    color: 'var(--signal-teal)',
+    technologies: sorted(['GPU', 'MPI', 'OpenMP', 'Performance optimization', 'SIMD']),
   },
   {
     key: 'testing',
@@ -41,7 +94,7 @@ const skillClusters = [
     title: 'Software Testing',
     short: 'Testing',
     color: 'var(--signal-amber)',
-    technologies: ['JUnit', 'PyUnit', 'Mockito', 'Cucumber', 'Selenium', 'Playwright'],
+    technologies: sorted(['JUnit', 'PyUnit', 'Mockito', 'Cucumber', 'Selenium', 'Playwright']),
   },
   {
     key: 'web',
@@ -49,7 +102,7 @@ const skillClusters = [
     title: 'Web Technologies',
     short: 'Web',
     color: 'var(--signal-emerald)',
-    technologies: ['REST APIs', 'GraphQL', 'WebSockets', 'gRPC'],
+    technologies: sorted(['REST APIs', 'GraphQL', 'WebSockets', 'gRPC']),
   },
   {
     key: 'data',
@@ -57,7 +110,7 @@ const skillClusters = [
     title: 'Data Engineering',
     short: 'Data',
     color: 'var(--signal-rose)',
-    technologies: ['Apache Airflow', 'PySpark', 'Power BI', 'Hadoop', 'OLAP', 'OLTP'],
+    technologies: sorted(['Apache Airflow', 'PySpark', 'Power BI', 'Hadoop', 'OLAP', 'OLTP']),
   },
   {
     key: 'devops',
@@ -65,7 +118,7 @@ const skillClusters = [
     title: 'DevOps',
     short: 'DevOps',
     color: 'var(--signal-indigo)',
-    technologies: ['GitLab', 'GitHub Actions', 'Docker', 'Jenkins'],
+    technologies: sorted(['GitLab', 'GitHub Actions', 'Docker', 'Jenkins']),
   },
 ] as const;
 
@@ -82,14 +135,14 @@ type Drift = {
   speedY: number;
 };
 
-const NODE_R = 36;
-const VIEW_W = 720;
-const VIEW_H = 560;
+const NODE_R = 32;
+const VIEW_W = 820;
+const VIEW_H = 640;
 
 function buildHomes(): Record<ClusterKey, Vec> {
   const cx = VIEW_W / 2;
   const cy = VIEW_H / 2;
-  const R = 195;
+  const R = 220;
   const out = {} as Record<ClusterKey, Vec>;
 
   skillClusters.forEach((cluster, i) => {
@@ -109,13 +162,21 @@ function buildDrift(): Record<ClusterKey, Drift> {
     out[cluster.key] = {
       phaseX: Math.random() * Math.PI * 2,
       phaseY: Math.random() * Math.PI * 2,
-      ampX: 12 + Math.random() * 16,
-      ampY: 12 + Math.random() * 16,
-      speedX: 0.4 + Math.random() * 0.5,
-      speedY: 0.35 + Math.random() * 0.55,
+      ampX: 10 + Math.random() * 14,
+      ampY: 10 + Math.random() * 14,
+      speedX: 0.35 + Math.random() * 0.45,
+      speedY: 0.3 + Math.random() * 0.5,
     };
   }
   return out;
+}
+
+function satellitePos(cx: number, cy: number, index: number, total: number, orbit: number) {
+  const angle = -Math.PI / 2 + (index * 2 * Math.PI) / total;
+  return {
+    x: cx + Math.cos(angle) * orbit,
+    y: cy + Math.sin(angle) * orbit,
+  };
 }
 
 type SkillsProps = {
@@ -221,10 +282,7 @@ export function Skills({ embedded = false }: SkillsProps) {
     if (!key) return;
     const local = clientToSvg(e.clientX, e.clientY);
     const nextPos = clamp(local.x - dragOffsetRef.current.x, local.y - dragOffsetRef.current.y);
-
-    // Update home immediately so float continues from here after release
     homesRef.current[key] = nextPos;
-
     const next = { ...positionsRef.current, [key]: nextPos };
     positionsRef.current = next;
     setPositions(next);
@@ -251,16 +309,14 @@ export function Skills({ embedded = false }: SkillsProps) {
   }
 
   const focus = hovered;
-  const focusCluster = focus ? skillClusters.find((c) => c.key === focus) : null;
-  const focusPos = focus ? positions[focus] : null;
 
   const graph = (
     <div className="relative w-full">
       <p className="hidden md:block text-center text-xs text-stage-muted mb-3 tracking-wide uppercase">
-        Drag nodes · hover for subskills
+        Drag nodes · hover to highlight subskills
       </p>
 
-      <div className="hidden md:block relative w-full aspect-[720/560] max-h-[min(560px,70vh)]">
+      <div className="hidden md:block relative w-full aspect-[820/640] max-h-[min(640px,72vh)]">
         <svg
           ref={svgRef}
           viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
@@ -297,58 +353,72 @@ export function Skills({ embedded = false }: SkillsProps) {
                 x2={nb.x}
                 y2={nb.y}
                 stroke="var(--stage-ink)"
-                strokeOpacity={dimmed ? 0.04 : involved ? 0.3 : 0.14}
-                strokeWidth={involved ? 1.6 : 1}
+                strokeOpacity={dimmed ? 0.03 : involved ? 0.28 : 0.1}
+                strokeWidth={involved ? 1.5 : 1}
               />
             );
           })}
 
-          {focusCluster && focusPos && (
-            <g className="pointer-events-none">
-              {focusCluster.technologies.map((tech, i) => {
-                const n = focusCluster.technologies.length;
-                const angle = -Math.PI / 2 + (i * 2 * Math.PI) / n;
-                const orbit = 82 + (n > 7 ? 10 : 0);
-                const sx = focusPos.x + Math.cos(angle) * orbit;
-                const sy = focusPos.y + Math.sin(angle) * orbit;
-                const labelW = Math.min(124, 10 + tech.length * 6.4);
+          {/* Subnodes always visible; highlight only on hover */}
+          {skillClusters.map((cluster) => {
+            const pos = positions[cluster.key];
+            if (!pos) return null;
+            const isFocus = focus === cluster.key;
+            const muted = focus !== null && !isFocus;
+            const n = cluster.technologies.length;
+            const orbit = 70 + Math.min(n, 8) * 2;
 
-                return (
-                  <g key={tech}>
-                    <line
-                      x1={focusPos.x}
-                      y1={focusPos.y}
-                      x2={sx}
-                      y2={sy}
-                      stroke={focusCluster.color}
-                      strokeOpacity={0.5}
-                      strokeWidth={1.2}
-                    />
-                    <rect
-                      x={sx - labelW / 2}
-                      y={sy - 11}
-                      width={labelW}
-                      height={22}
-                      rx={11}
-                      fill="var(--stage-elevated)"
-                      stroke={focusCluster.color}
-                      strokeOpacity={0.6}
-                      strokeWidth={1}
-                    />
-                    <text
-                      x={sx}
-                      y={sy + 4}
-                      textAnchor="middle"
-                      style={{ fontSize: 10, fontWeight: 500 }}
-                      fill="var(--stage-ink)"
-                    >
-                      {tech}
-                    </text>
-                  </g>
-                );
-              })}
-            </g>
-          )}
+            return (
+              <g key={`subs-${cluster.key}`} className="pointer-events-none">
+                {cluster.technologies.map((tech, i) => {
+                  const sat = satellitePos(pos.x, pos.y, i, n, orbit);
+                  const labelW = Math.min(118, 8 + tech.length * 5.8);
+
+                  return (
+                    <g key={tech} opacity={muted ? 0.12 : isFocus ? 1 : 0.38}>
+                      <line
+                        x1={pos.x}
+                        y1={pos.y}
+                        x2={sat.x}
+                        y2={sat.y}
+                        stroke={cluster.color}
+                        strokeOpacity={isFocus ? 0.55 : 0.25}
+                        strokeWidth={isFocus ? 1.3 : 0.8}
+                      />
+                      <circle
+                        cx={sat.x}
+                        cy={sat.y}
+                        r={isFocus ? 4.5 : 3}
+                        fill={cluster.color}
+                        fillOpacity={isFocus ? 1 : 0.55}
+                      />
+                      <rect
+                        x={sat.x - labelW / 2}
+                        y={sat.y - (isFocus ? 12 : 10)}
+                        width={labelW}
+                        height={isFocus ? 22 : 18}
+                        rx={isFocus ? 11 : 9}
+                        fill="var(--stage-elevated)"
+                        stroke={cluster.color}
+                        strokeOpacity={isFocus ? 0.7 : 0.2}
+                        strokeWidth={isFocus ? 1.2 : 0.6}
+                      />
+                      <text
+                        x={sat.x}
+                        y={sat.y + (isFocus ? 4 : 3)}
+                        textAnchor="middle"
+                        style={{ fontSize: isFocus ? 10 : 8, fontWeight: isFocus ? 600 : 400 }}
+                        fill="var(--stage-ink)"
+                        fillOpacity={isFocus ? 1 : 0.55}
+                      >
+                        {tech}
+                      </text>
+                    </g>
+                  );
+                })}
+              </g>
+            );
+          })}
 
           {skillClusters.map((cluster) => {
             const pos = positions[cluster.key];
@@ -367,30 +437,29 @@ export function Skills({ embedded = false }: SkillsProps) {
                   if (!draggingRef.current) setHovered(cluster.key);
                 }}
                 className={`${isDragging ? 'cursor-grabbing' : 'cursor-grab'} ${
-                  dimmed ? 'opacity-25' : 'opacity-100'
+                  dimmed ? 'opacity-35' : 'opacity-100'
                 } transition-opacity duration-200`}
                 style={{ touchAction: 'none' }}
               >
-                {/* Larger hit target */}
-                <circle r={NODE_R + 8} fill="transparent" />
+                <circle r={NODE_R + 10} fill="transparent" />
                 <circle
-                  r={isFocus || isDragging ? NODE_R + 4 : NODE_R}
+                  r={isFocus || isDragging ? NODE_R + 3 : NODE_R}
                   fill={cluster.color}
                   fillOpacity={0.18}
                   stroke={cluster.color}
                   strokeWidth={isFocus || isDragging ? 2.5 : 1.5}
                   filter={isFocus ? 'url(#node-glow)' : undefined}
                 />
-                <circle r={22} fill={cluster.color} />
-                <foreignObject x={-10} y={-10} width={20} height={20} className="pointer-events-none">
+                <circle r={20} fill={cluster.color} />
+                <foreignObject x={-9} y={-9} width={18} height={18} className="pointer-events-none">
                   <div className="w-full h-full flex items-center justify-center">
-                    <Icon className="w-4 h-4 text-white" />
+                    <Icon className="w-3.5 h-3.5 text-white" />
                   </div>
                 </foreignObject>
                 <text
-                  y={NODE_R + 16}
+                  y={NODE_R + 14}
                   textAnchor="middle"
-                  style={{ fontSize: 12, fontWeight: 600 }}
+                  style={{ fontSize: 11, fontWeight: 600 }}
                   fill="var(--stage-ink)"
                   className="pointer-events-none select-none"
                 >

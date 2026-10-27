@@ -135,3 +135,28 @@ export function CricketMotif({ className }: MotifProps) {
     </Frame>
   );
 }
+
+export function GraphAnalyticsMotif({ className }: MotifProps) {
+  return (
+    <Frame className={className}>
+      <circle cx="90" cy="90" r="14" fill="var(--signal-teal)" />
+      <circle cx="200" cy="70" r="12" fill="var(--signal-cyan)" />
+      <circle cx="320" cy="95" r="14" fill="var(--signal-blue)" />
+      <circle cx="140" cy="180" r="12" fill="var(--signal-violet)" />
+      <circle cx="260" cy="190" r="16" fill="var(--signal-emerald)" />
+      <circle cx="380" cy="160" r="12" fill="var(--signal-amber)" />
+      <circle cx="240" cy="120" r="10" fill="var(--signal-rose)" />
+      <path
+        d="M104 90 L188 74 M212 78 L306 95 M110 100 L132 168 M332 105 L270 180 M152 180 L244 190 M276 190 L368 165 M210 78 L232 112 M250 128 L312 105 M248 132 L258 174"
+        stroke="var(--stage-ink)"
+        strokeOpacity="0.35"
+        strokeWidth="2"
+        fill="none"
+      />
+      <path d="M60 230 H420" stroke="var(--stage-line)" strokeWidth="1" />
+      <rect x="70" y="220" width="50" height="6" rx="2" fill="var(--signal-teal)" opacity="0.7" />
+      <rect x="140" y="220" width="80" height="6" rx="2" fill="var(--signal-cyan)" opacity="0.5" />
+      <rect x="240" y="220" width="60" height="6" rx="2" fill="var(--signal-emerald)" opacity="0.5" />
+    </Frame>
+  );
+}

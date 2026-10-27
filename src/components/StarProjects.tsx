@@ -10,6 +10,7 @@ import {
   EventBriteMotif,
   ChaosMotif,
   CricketMotif,
+  GraphAnalyticsMotif,
 } from './ProjectMotifs';
 
 type Project = {
@@ -27,6 +28,20 @@ type Category = {
 };
 
 const projectCategories: Category[] = [
+  {
+    title: 'System Engineering',
+    projects: [
+      {
+        title: 'Graph Analytics',
+        description:
+          'Graph analytics toolkit for exploring structure, relationships, and performance across large connected datasets',
+        tags: ['Python', 'Graphs', 'Analytics', 'Systems'],
+        githubUrl: 'https://github.com/wolfy5786/graph_analytics',
+        Motif: GraphAnalyticsMotif,
+        accent: 'text-signal-teal',
+      },
+    ],
+  },
   {
     title: 'Agentic AI',
     projects: [
