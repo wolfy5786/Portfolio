@@ -32,13 +32,17 @@ const experiences = [
   {
     title: 'Software Engineer Intern',
     company: 'Simplified IT Solutions',
-    period: 'May 2023 - August 2023',
+    period: 'May 2024 - September 2024',
     bullets: [
-      'Built and maintained Spring Boot REST services for a scalable web platform.',
-      'Applied TDD with JUnit/Mockito to improve code quality and speed up releases.',
-      'Validated API–frontend contracts, catching critical issues early.',
+      'My key role was in the development and maintenance of middle-tier services of a bank using C++ and Crow supporting REST endpoints and handling up to 500 requests per second in load testing, while reducing p95 response latency by 25%.',
+      'Engineered backend health checks and automatic failover to reroute traffic from unhealthy servers within 10 seconds, reducing failed requests by 40% and maintaining 99.9% service availability, keeping production p99 latency below 700ms.',
+      'Built Grafana dashboards for availability, latency, error rate, and throughput; used Prometheus to investigate degradation and anomalies, reducing monitoring and diagnosis effort by 25%.',
     ],
-    metrics: [],
+    metrics: [
+      { value: '25%', label: 'p95 latency cut' },
+      { value: '40%', label: 'fewer failures' },
+      { value: '99.9%', label: 'availability' },
+    ],
   },
 ];
 
